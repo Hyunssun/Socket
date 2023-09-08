@@ -8,17 +8,13 @@ function App() {
 
   useEffect(() => {
     socket.on("message", (message: string) => {
-      setMessage("");
       setMessages((prevMessages) => [...prevMessages, message]);
     });
-
-    return () => {
-      socket.disconnect();
-    };
-  }, [socket]);
+  }, []);
 
   const onClickSend = () => {
     socket.emit("message", message);
+    setMessage("");
   };
 
   return (
